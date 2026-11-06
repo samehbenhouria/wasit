@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wasit — The interpreter agent that checks what you meant before it speaks in your name · Judge demo</title>
+<style>
+body{font-family:system-ui,Arial,sans-serif;margin:0;background:#0f1420;color:#e8ecf3}
+header{padding:20px 24px;background:#16203a} h1{font-size:20px;margin:0 0 6px}
+.sub{color:#9fb2d8;font-size:13px} main{max-width:960px;margin:0 auto;padding:20px}
+.card{background:#1a2438;border:1px solid #2c3a58;border-radius:10px;padding:16px 18px;margin:14px 0}
+button{background:#2f6fed;color:#fff;border:0;border-radius:8px;padding:9px 16px;font-size:14px;cursor:pointer}
+button:disabled{opacity:.4}
+.step{display:none}.step.on{display:block}
+pre{white-space:pre-wrap;background:#0b0f18;border-radius:8px;padding:12px;font-size:12.5px;line-height:1.5;overflow:auto}
+.tag{display:inline-block;background:#274b2f;color:#b7f0c0;border-radius:6px;padding:2px 8px;font-size:12px;margin-right:6px}
+.sim{background:#4b3a27;color:#f0d4b7}.warn{color:#f0b7b7}.ok{color:#8fe6a0}.big{font-size:17px}
+table{border-collapse:collapse;width:100%;font-size:13.5px} td,th{border-bottom:1px solid #2c3a58;padding:6px 8px;text-align:left}
+.notice{border:1px dashed #8a6d2f;background:#2a2113;color:#f2d492;border-radius:8px;padding:10px 14px;font-size:13.5px}
+</style></head><body>
+<header><h1>Wasit — The interpreter agent that checks what you meant before it speaks in your name</h1>
+<div class="sub">Dubai Create AI Agents Championship · Best Personal AI Agent · Judge demo. Demo access: user <b>judge</b> / password <b>demo</b> (fictional, display-only — this page is static).</div></header>
+<main>
+<div class="notice"><b>What is real here, stated plainly:</b> this page <b>replays recorded, signed traces</b> in a judge-friendly walkthrough; it does not run the agent live — no microphone, no network call, no model sits behind this link. The chain itself exists and was measured end-to-end. Acts 1–3 replay the <b>blind bench and the preparation passes</b> (frozen corpora, frozen scores, signed at the freeze of 28 Oct 2026). Act 4 carries the <b>formal campaign</b>: 475 passages over the 95 frozen units, blind-graded by a non-author seat, report signed 5 Nov 2026. <b>Measurement conditions, never hidden:</b> the corpora are frozen and synthetic — utterances written by the team, neutral synthesized voices, simulated interlocutors, and simulated answers to clarification questions. No real speech, no real user, no real call has been measured. The headline limit is printed with the results, not under them: after mediation, <b>49.2% of trap passages still transmit a material error</b>. The cross-channel memory is no longer a promise: the campaign's binary verdict is <b>PROVEN, 4/5</b> — with its one failing sequence and its structural limit named in Act 4.</div>
+
+<div class="card"><div class="big">The 3-minute judge journey</div>
+<p><span class="tag sim">Act 1 · BENCH</span> Clarify before transmitting: one amount trap replayed in three beats — and a clean control the agent leaves alone.<br>
+<span class="tag sim">Act 2 · PREPARATION</span> The ear's ceiling, attacked and measured: the stronger speech recognizer recovers the signals the bench was losing — at a latency price, printed.<br>
+<span class="tag sim">Act 3 · PREPARATION</span> The reinforced chain, including its misses: five detector holes converted, then an end-to-end dry run with its two failures named.<br>
+<span class="tag">Act 4 · FORMAL CAMPAIGN — signed</span> 475 passages, blind-graded: errors 265 → 155, register 5/6, memory PROVEN 4/5 — and the weak families, named.</p>
+<button id="start">Start the journey ▸</button></div>
+
+<div id="stage"></div>
+</main>
+<script>
+const D = {"banc": {"pieges": 18, "base": 16, "mediee": 10, "interceptions": 8, "questions": 8, "faux_positifs": 0, "controles": 6, "registres": 2}, "t01": {"enonce": "Pour les travaux de la cuisine, le devis, c'est mille cinq.", "asr": "Pour les travaux de la cuisine, le devis, c'est 1005.", "base": "For kitchen work, the quote is 1005.", "question": "Précisez-moi le montant exact, avec l'unité, s'il vous plaît ?", "source_clarifiee": "Pour les travaux de la cuisine, le devis, c'est mille cinq cents dollars, soit 1500 dollars.", "sortie": "For the kitchen work, the estimate is one thousand five hundred dollars, or 1500 dollars."}, "c01": {"enonce": "La réunion est à dix heures demain matin.", "asr": "La réunion est à 10h demain matin.", "sortie": "The meeting is at 10am tomorrow morning."}, "asr": {"small_survecus": "14/16", "medium_survecus": "16/16", "detruits_banc": ["T02", "T06", "T08", "T10", "T12", "T14"], "t06_small": "On se retrouve jeudi en lui pour signer.", "t06_medium": "On se retrouve jeudi en huit pour signer.", "lat_small": "29.52", "lat_medium": "83.41", "lat_ratio": "2.826", "etalonnage": "10/12 (small : 8/12) ; residus E11 (noms FR Verre/Champ -> 'Vert/Chan') et E12 (heure levantine 'ونص' -> 'ومص') detruits sous les DEUX moteurs"}, "remesure": {"conversions": ["T02", "T03", "T04", "T12", "T14"], "q_v1": 8, "q_v2": 13}, "blanc": {"V2-T02": {"asr": "Pour la Compte des matériaux, c'est 1002.", "detections": ["montant"], "question": "Précisez-moi le montant exact, avec l'unité, s'il vous plaît ?", "reponse": "Mille deux cents dollars.", "sortie": "For the down payment of materials, it is one thousand two hundred dollars, or 1200 dollars.", "moteur": "mymemory"}, "V2-C01": {"asr": "La réunion est lundi à 9 heures précises.", "detections": [], "question": null, "reponse": null, "sortie": "The meeting is Monday at 9 a.m. sharp.", "moteur": "mymemory"}, "V2-T08": {"asr": "J'ai parlé à Samil, et à Yacine, il signera le bail demain.", "detections": [], "question": null, "reponse": null, "sortie": "I spoke to Samil, and to Yacine, he will sign the lease tomorrow.", "moteur": "mymemory"}, "V2-T17": {"asr": "تصليح السيارة بجوجي ونس", "detections": [], "question": null, "reponse": null, "sortie": "Jogi Wans Car Repair", "moteur": "mymemory"}}, "campagne": {"passages": 475, "unites": 95, "pieges_passages": 315, "base_erreurs": 265, "mediee_erreurs": 155, "residuel_pct": "49.2", "v1_base": "16/18", "v1_mediee": "5/18", "v1_banc_mediee": "10/18", "v2_base": "185/225", "v2_mediee": "130/225", "v2_residuel_pct": "57.8", "interceptions": 160, "cout_median_clarification": "5.2", "faux_positifs": "0/105", "registre": "5/6", "registre_passages": "25/30", "r1": "0/5", "memoire_verdict": "PROVEN", "memoire": "4/5", "signaux_detruits_v1": 0, "signaux_detruits_banc": "6/18", "heure_v2": "30/30", "politesse_v2": "10/10", "degrade": "V2-T42", "scenarios": "V1 16/24 · V2 33/60 · V3 5/6 · V4 4/5", "source": "Formal campaign, blind-graded by a non-author seat — RAPPORT_CAMPAGNE_INTERPRETE.md, signed 2026-11-05"}};
+const stage = document.getElementById('stage');
+let step = -1;
+const acts = [];
+acts.push(()=> `<div class="card step on"><div class="big">Act 1 — Clarify before transmitting <span class="tag sim">BENCH — frozen corpus, frozen score</span></div>
+  <p>One trap from the blind bench, replayed exactly as journalled. The speaker says, in French, that the kitchen quote is <i>« mille cinq »</i> — fifteen hundred. The speech recognizer hears a bare number:</p>
+  <pre>Speaker: « ${D.t01.enonce} »
+ASR transcript: « ${D.t01.asr} »
+
+BASE CHAIN (translate and transmit):
+→ "${D.t01.base}"   ✗ the amount that leaves is 1005, not 1,500
+
+WASIT — the amount detector fires on the bare number; transmission stops.
+Question, asked in the speaker's own language: « ${D.t01.question} »
+Speaker clarifies; clarified source: « ${D.t01.source_clarifiee} »
+→ Transmitted: "${D.t01.sortie}"   ✓</pre>
+  <p>Beside it, a clean control from the same bench — nothing ambiguous, so the agent asks nothing and transmits untouched:</p>
+  <pre>Speaker: « ${D.c01.enonce} » → Transmitted: "${D.c01.sortie}" (no detection, no question)</pre>
+  <p class="ok big">Bench totals (frozen score): material errors transmitted on ${D.banc.pieges} traps — baseline ${D.banc.base}/${D.banc.pieges} → mediated ${D.banc.mediee}/${D.banc.pieges}; ${D.banc.interceptions} interceptions, ${D.banc.questions} questions, ${D.banc.faux_positifs} false positives on ${D.banc.controles} controls, ${D.banc.registres} register applications. The frozen score carried here is the least favourable reading (a material reading of the same bench gives 9/18 mediated errors).</p></div>`);
+acts.push(()=> `<div class="card step on"><div class="big">Act 2 — The ear's ceiling, attacked and measured <span class="tag sim">PREPARATION — identical-items pass</span></div>
+  <p>At the bench, six traps died at transcription itself — no mediation can recover a signal the ear destroyed. Case T06, verbatim under both recognizers; the phrase is <i>« jeudi en huit »</i> — a week on Thursday:</p>
+  <pre>faster-whisper-small:  « ${D.asr.t06_small} »   ✗ "en lui" — the date signal is destroyed
+faster-whisper-medium: « ${D.asr.t06_medium} »  ✓ "en huit" — the signal survives</pre>
+  <table><tr><th>Identical-items pass (24 frozen items, interleaved)</th><th>small</th><th>medium</th></tr>
+  <tr><td>Carrier signals surviving transcription</td><td>${D.asr.small_survecus}</td><td>${D.asr.medium_survecus}, 0 destroyed</td></tr>
+  <tr><td>Calibration set (12 items)</td><td>8/12</td><td>10/12</td></tr>
+  <tr><td>Median latency per utterance</td><td>${D.asr.lat_small} s</td><td>${D.asr.lat_medium} s</td></tr></table>
+  <p>The six signals destroyed at the bench (${D.asr.detruits_banc.join(', ')}) all survive under medium — the campaign later confirms 0 destroyed on V1. The price is printed, not hidden: median latency ratio <b>${D.asr.lat_ratio} ≤ 3</b> (the written adoption rule), measured on a saturated shared machine — <b>the ratio is the portable figure; the seconds are not a service latency</b>. Residual limit, under BOTH engines: E11 (the names "Verre / Champ" heard as "Vert / Chan") and E12 (a Levantine hour) stay destroyed at transcription — no mediation downstream can recover them.</p></div>`);
+acts.push(()=> `<div class="card step on"><div class="big">Act 3 — The reinforced chain, including its misses <span class="tag sim">PREPARATION — re-measurement + dry run</span></div>
+  <p>The v2 detectors, re-measured on the bench's real transcripts, convert exactly the five named holes — ${D.remesure.conversions.join(', ')}: questions rise ${D.remesure.q_v1} → <b>${D.remesure.q_v2}/18 traps</b>, false positives stay 0 → 0. Then the full chain ran end-to-end on four dry-run items held outside the counted truths:</p>
+  <pre>V2-T02 — ASR hears: « ${D.blanc['V2-T02'].asr} » ("1002" for "mille deux")
+  Amount detector fires. Question: « ${D.blanc['V2-T02'].question} »
+  Answer (simulated, as journalled): « ${D.blanc['V2-T02'].reponse} »
+  → Transmitted: "${D.blanc['V2-T02'].sortie}"   ✓ the clarified amount, 1,200 dollars
+V2-C01 — clean control: → "${D.blanc['V2-C01'].sortie}" (no detection, no question) ✓</pre>
+  <p class="warn"><b>The two misses of the same dry run, named:</b> V2-T08 — the names sit outside the detector's closed inventory and are further garbled by the recognizer (« ${D.blanc['V2-T08'].asr} »); transmitted unmediated: "${D.blanc['V2-T08'].sortie}". V2-T17 — the Maghrebi amount « جوج ونص » is destroyed at transcription itself (« ${D.blanc['V2-T17'].asr} »); transmitted raw: "${D.blanc['V2-T17'].sortie}" — no mediation is possible on a signal that never arrived. Clarification answers in this dry run are <b>simulated</b> (written answers, journalled as such); the translation engine is recorded per item in the journal (${D.blanc['V2-T02'].moteur}).</p></div>`);
+acts.push(()=> `<div class="card step on"><div class="big">Act 4 — The formal campaign: 475 passages, blind-graded, signed <span class="tag">CAMPAIGN — signed report, 5 Nov 2026</span></div>
+  <p>The frozen corpora (V1: 24 utterances · V2: 60 · V3 register: 6 contexts · V4 memory: 5 sequences × 3 beats), five passages per unit, graded blind by a non-author seat against the sealed checks; the freeze was re-verified after the campaign: 11/11 hashes conforming.</p>
+  <table><tr><th>Measure (campaign)</th><th>Result</th></tr>
+  <tr><td>Material errors transmitted — traps V1+V2 (${D.campagne.pieges_passages} passages)</td><td>baseline <b>${D.campagne.base_erreurs}</b> → mediated <b>${D.campagne.mediee_erreurs}</b> — residual <b>${D.campagne.residuel_pct}%</b></td></tr>
+  <tr><td>Same corpus as the bench (V1, per item)</td><td>baseline ${D.campagne.v1_base} → mediated <b>${D.campagne.v1_mediee}</b> (bench: ${D.campagne.v1_banc_mediee})</td></tr>
+  <tr><td>Expanded corpus never seen while the detectors were written (V2, per passage)</td><td>baseline ${D.campagne.v2_base} → mediated ${D.campagne.v2_mediee} — residual ${D.campagne.v2_residuel_pct}%</td></tr>
+  <tr><td>Interceptions</td><td>${D.campagne.interceptions}/${D.campagne.pieges_passages} trap passages · clarification cost, median ${D.campagne.cout_median_clarification} s</td></tr>
+  <tr><td>False positives</td><td><b>${D.campagne.faux_positifs}</b> control passages — not one needless question</td></tr>
+  <tr><td>Register (V3)</td><td><b>${D.campagne.registre}</b> contexts conforming (${D.campagne.registre_passages} passages); the formal sense holds 3/3 — the failing context is R1, informal EN→FR, at <b>${D.campagne.r1}</b>: systematic over-politeness against the written policy</td></tr>
+  <tr><td>Carrier signals destroyed at transcription (V1)</td><td><b>${D.campagne.signaux_detruits_v1}</b> (bench: ${D.campagne.signaux_detruits_banc} items)</td></tr>
+  <tr><td>Critical failures (the plan's four categories, checked one by one)</td><td><b>0</b></td></tr>
+  <tr><td>Validated scenarios</td><td>${D.campagne.scenarios}</td></tr></table>
+  <p class="big">Memory verdict — <b>PROVEN, ${D.campagne.memoire} sequences</b>. M1, M2, M4, M5 reuse the defined term and the register preference at beats 2 and 3, 5/5 passages each, with no redefinition by the user. <b>Its limit travels with the figure:</b> M3 fails on the term alone (0/5, register held 5/5) — the store kept « le gros carton », the translation produced « la grande boîte », and the frozen single-form matcher never finds its key. Reuse presupposes that the translation reproduces the exact stored form. The proven memory is a per-contact store (glossary + register policy), not a general memory.</p>
+  <p>Guardrails: G1 disclosure of the agent as interpreter — held, 475/475 journals. G3 nothing invented — held in the frozen instrument's sense. G4 no cloned voice — conforming by construction (neutral synthesized voices). G5 zero needless questions — held, ${D.campagne.faux_positifs}. <b>G2 — clarification refused: NOT EXERCISED.</b> No refusal scenario exists in the frozen corpora or in the 475 journals; the behaviour is specified in the product rules and journalled by construction, but it was <b>not measured</b>, and no score is claimed for it.</p>
+  <p class="warn"><b>Weak families, named — never averaged away:</b> time expressions on the expanded corpus fail <b>${D.campagne.heure_v2}</b> with <b>0/30 interceptions</b> — a complete detector blind spot (the V1 form is caught 5/5; none of the six expanded forms is covered). Double-meaning politeness fails <b>${D.campagne.politesse_v2}</b>: the clarification happens, then the clarified sense is lost in translation. And ${D.campagne.degrade} was <b>degraded by the mediation itself</b> — correct at baseline 5/5, wrong after mediation 5/5. Campaign limits: frozen synthetic corpora, synthesized voices, simulated interlocutors and answers; the register family is measured on text, not on transcribed speech; campaign latencies are this shared machine's CPU figures, not product latencies.</p>
+  <p class="ok big">What this campaign proves: mediation divides the transmitted error by ~1.7 at campaign scale, the memory works under its written binary criterion — and one trap passage in two still leaves with a material error. Both halves of that sentence are the result.</p></div>`);
+document.getElementById('start').onclick = ()=>{
+  step++;
+  if(step < acts.length){ stage.innerHTML = acts[step]();
+    const b=document.getElementById('start'); b.textContent = step<acts.length-1 ? 'Next act ▸' : 'Restart the journey';
+    if(step===acts.length-1){ b.onclick=()=>{step=-1;stage.innerHTML='';b.textContent='Start the journey ▸'; b.onclick=document.getElementById('start').onclick; location.reload();}; }
+  }
+};
+</script></body></html>
